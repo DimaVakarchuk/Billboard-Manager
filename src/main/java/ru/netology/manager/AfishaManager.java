@@ -11,9 +11,9 @@ import ru.netology.repository.AfishaRepository;
 @NoArgsConstructor
 @Data
 
-    public class AfishaManager {
+public class AfishaManager {
     private AfishaRepository repository;
-    private int countFilms = 15;
+    private int countFilms = 10;
 
     public AfishaManager(int countFilms) {
         this.countFilms = countFilms;

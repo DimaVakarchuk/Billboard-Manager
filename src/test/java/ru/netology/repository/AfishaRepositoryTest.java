@@ -21,11 +21,6 @@ class AfishaRepositoryTest {
     private Film eighth = new Film(8, 8, "Jumanji", "Comedy", "1996");
     private Film ninth = new Film(9, 9, "Jumanji 2", "Comedy", "2017");
     private Film tenth = new Film(10, 10, "Transformers", "Action", "2007");
-    private Film eleventh = new Film(11, 11, "Transformers 2", "Action", "2009");
-    private Film twelveth = new Film(12, 12, "Transformers 3", "Action", "2011");
-    private Film thirteen = new Film(13, 13, "Transformers 4", "Action", "2015");
-    private Film fourteeth = new Film(14, 14, "Transformers 5", "Action", "2017");
-    private Film fifteenth = new Film(15, 15, "Judge", "History", "2015");
 
     @BeforeEach
     void setUp() {
@@ -40,52 +35,41 @@ class AfishaRepositoryTest {
         repository.save(eighth);
         repository.save(ninth);
         repository.save(tenth);
-        repository.save(eleventh);
-        repository.save(twelveth);
-        repository.save(thirteen);
-        repository.save(fourteeth);
-        repository.save(fifteenth);
-    }
-
-    @Test
-    void save() {
-        Film eleventh = new Film(15, 15, "Judge", "History", "2015");
-        repository.save(fifteenth);
-        Film[] actual = repository.findAll();
-        Film[] expected = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, eleventh, twelveth, thirteen, fourteeth, fifteenth};
-        assertArrayEquals(expected, actual);
-    }
-
-
-    @Test
-    void findAll() {
-
-        Film[] actual = repository.findAll();
-        Film[] expected = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, eleventh, twelveth, thirteen, fourteeth, fifteenth};
-        assertArrayEquals(expected, actual);
-    }
-
-
-    @Test
-    void removeById() {
-        repository.removeById(25);
-
-        Film[] actual = repository.findAll();
-        Film[] expected = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, eleventh, twelveth, thirteen, fourteeth, fifteenth};
-        assertArrayEquals(expected, actual);
     }
 
     @Test
     void findById() {
-        Film actual = repository.findById(15);
-        assertEquals(fifteenth, actual);
+        Film actual = repository.findById(10);
+        assertEquals(tenth, actual);
     }
 
+    @Test
+    void findAll() {
+        Film[] actual = repository.findAll();
+        Film[] expected = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void removeById() {
+        repository.removeById(1);
+        Film[] actual = repository.findAll();
+        Film[] expected = new Film[]{second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void Save() {
+        Film eleventh = new Film(11, 11, "Transformers 2", "Action", "2009");
+        repository.save(eleventh);
+        Film[] actual = repository.findAll();
+        Film[] expected = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, eleventh};
+        assertArrayEquals(expected, actual);
+    }
 
     @Test
     void removeAll() {
         repository.removeAll();
-
         Film[] actual = repository.findAll();
         Film[] expected = new Film[0];
         assertArrayEquals(expected, actual);

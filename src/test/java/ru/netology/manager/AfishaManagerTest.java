@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.netology.domain.Film;
 import ru.netology.repository.AfishaRepository;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,26 +29,6 @@ public class AfishaManagerTest {
     Film eighth = new Film(8, 8, "Jumanji", "Comedy", "1996");
     Film ninth = new Film(9, 9, "Jumanji 2", "Comedy", "2017");
     Film tenth = new Film(10, 10, "Transformers", "Action", "2007");
-    Film eleventh = new Film(11, 11, "Transformers 2", "Action", "2009");
-    Film twelveth = new Film(12, 12, "Transformers 3", "Action", "2011");
-    Film thirteen = new Film(13, 13, "Transformers 4", "Action", "2015");
-    Film fourteeth = new Film(14, 14, "Transformers 5", "Action", "2017");
-    Film fifteenth = new Film(15, 15, "Judge", "History", "2015");
-
-    @Test
-    public void SaveVideo() {
-        Film fifteenth = new Film(15, 15, "Judge", "History", "2015");
-        Film[] returned;
-        returned = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, eleventh, twelveth, thirteen, fourteeth, fifteenth};
-        doReturn(returned).when(repository).findAll();
-        doNothing().when(repository).save(fifteenth);
-
-        manager.addFilm(fifteenth);
-        Film[] actual = manager.getFilms();
-        Film[] expected = new Film[]{fifteenth, fourteeth, thirteen, twelveth, eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
-        assertArrayEquals(expected, actual);
-        verify(repository).findAll();
-    }
 
     @Test
     public void getlessThan15Video() {
@@ -76,13 +56,13 @@ public class AfishaManagerTest {
 
     @Test
     public void getMoreThan10Video() {
-        Film[] returned = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, eleventh, twelveth, thirteen, fourteeth, fifteenth};
+        Film[] returned = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth};
         doReturn(returned).when(repository).findAll();
 
         AfishaManager manager = new AfishaManager(repository,15);
 
         Film[] actual = manager.getFilms();
-        Film[] expected = new Film[]{fifteenth, fourteeth, thirteen, twelveth, eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
+        Film[] expected = new Film[]{tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
         assertArrayEquals(expected, actual);
         verify(repository).findAll();
     }
