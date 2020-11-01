@@ -27,9 +27,6 @@ public class FilmManager {
         if (countFilms < 0) {
             length = 0;
         }
-        if (length > countFilms) {
-            countFilms = length;
-        }
         Film[] result = new Film[countFilms];
         for (int i = 0; i < countFilms; i++) {
             int index = items.length - i - 1;

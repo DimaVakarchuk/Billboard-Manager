@@ -46,7 +46,6 @@ class FilmManagerTest {
         manager.addFilm(fifteenth);
         manager.addFilm(sixteenth);
         manager.addFilm(seventeenth);
-
     }
 
     @Test
@@ -109,8 +108,8 @@ class FilmManagerTest {
     }
 
     @Test
-    public void getNegativeNumberFilms() {
-        FilmManager manager = new FilmManager(-5);
+    public void getNegativNumberFilms() {
+        FilmManager manager = new FilmManager(0);
         manager.addFilm(first);
         manager.addFilm(second);
         manager.addFilm(third);
