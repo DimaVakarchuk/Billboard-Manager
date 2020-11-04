@@ -21,14 +21,9 @@ class FilmManagerTest {
     private Film tenth = new Film(10, 10, "Transformers", "Action", "2007");
     private Film eleventh = new Film(11, 11, "Transformers 2", "Action", "2009");
     private Film twelveth = new Film(12, 12, "Transformers 3", "Action", "2011");
-    private Film fourteenth = new Film(13, 13, "Transformers 4", "Action", "2015");
-    private Film fourteeth = new Film(14, 14, "Transformers 5", "Action", "2017");
-    private Film fifteenth = new Film(15, 15, "Judge", "History", "2015");
-    private Film sixteenth = new Film(16, 16, "Bachelor party in Vegas", "Comedy", "2010");
-    private Film seventeenth = new Film(17, 17, "Bachelor party in Vegas 2", "Comedy", "2015");
 
     @BeforeEach
-    void film() {
+    void addFilm() {
         manager.addFilm(first);
         manager.addFilm(second);
         manager.addFilm(third);
@@ -41,11 +36,6 @@ class FilmManagerTest {
         manager.addFilm(tenth);
         manager.addFilm(eleventh);
         manager.addFilm(twelveth);
-        manager.addFilm(fourteenth);
-        manager.addFilm(fourteeth);
-        manager.addFilm(fifteenth);
-        manager.addFilm(sixteenth);
-        manager.addFilm(seventeenth);
     }
 
     @Test
@@ -108,11 +98,21 @@ class FilmManagerTest {
     }
 
     @Test
-    public void getNegativNumberFilms() {
-        FilmManager manager = new FilmManager(0);
+    public void get5Films() {
+        FilmManager manager = new FilmManager(5);
         manager.addFilm(first);
         manager.addFilm(second);
         manager.addFilm(third);
+        manager.addFilm(fourth);
+        manager.addFilm(fifth);
+        Film[] actual = manager.getFilms();
+        Film[] expected = new Film[]{fifth, fourth, third, second, first};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void get0Films() {
+        FilmManager manager = new FilmManager(0);
         Film[] actual = manager.getFilms();
         Film[] expected = new Film[]{};
         assertArrayEquals(expected, actual);

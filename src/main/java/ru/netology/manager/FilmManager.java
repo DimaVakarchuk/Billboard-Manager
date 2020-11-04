@@ -4,7 +4,7 @@ import ru.netology.domain.Film;
 
 public class FilmManager {
     private Film[] items = new Film[0];
-    private int countFilms;
+    private int countFilms = 10;
 
     public FilmManager() {
     }
@@ -23,12 +23,10 @@ public class FilmManager {
     }
 
     public Film[] getFilms() {
-        int length = countFilms;
-        if (countFilms < 0) {
-            length = 0;
-        }
-        Film[] result = new Film[countFilms];
-        for (int i = 0; i < countFilms; i++) {
+        int length = Math.min(items.length, countFilms);
+
+        Film[] result = new Film[length];
+        for (int i = 0; i < length; i++) {
             int index = items.length - i - 1;
             result[i] = items[index];
         }
